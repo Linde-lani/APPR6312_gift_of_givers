@@ -1,0 +1,71 @@
+﻿@page
+@model gifters.Pages.DonationsModel
+@{
+}
+
+<h2 class="fw-bold mb-4 text-primary">My Donations</h2>
+
+@* Show status message (set via TempData in the PageModel after successful post) *@
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success" role="alert">@Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm p-4 mb-4">
+    <h4 class="fw-bold">Donation History</h4>
+    <hr />
+    <ul class="list-group list-group-flush">
+        @if (Model.Donations != null && Model.Donations.Count > 0)
+        {
+            foreach (var donation in Model.Donations)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div>
+                        @* Ensure numeric formatting is evaluated by Razor using the @(...) syntax *@
+                        <div class="fw-semibold">R@(@donation.Amount.ToString("0.00"))</div>
+                        <div class="text-muted small">@donation.Purpose</div>
+                    </div>
+                    <small class="text-muted">@donation.Date.ToShortDateString()</small>
+                </li>
+            }
+        }
+        else
+        {
+            <li class="list-group-item text-muted">You have no donations yet.</li>
+        }
+    </ul>
+</div>
+
+<!-- Add new donation form (uses Razor tag helpers for robust model binding & validation) -->
+<form method="post" asp-page-handler="Add" class="card p-4 shadow-sm mt-4">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label asp-for="NewDonation.Amount" class="form-label">Amount (ZAR)</label>
+        <input asp-for="NewDonation.Amount"
+               class="form-control"
+               type="number"
+               step="0.01"
+               min="0" />
+        <span asp-validation-for="NewDonation.Amount" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NewDonation.Purpose" class="form-label">Purpose</label>
+        <input asp-for="NewDonation.Purpose" class="form-control" />
+        <span asp-validation-for="NewDonation.Purpose" class="text-danger"></span>
+    </div>
+
+    @* Optional: include hidden UserId if your PageModel expects it from the form *@
+    @* <input asp-for="NewDonation.UserId" type="hidden" /> *@
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Add Donation</button>
+        <a asp-page="/Profile/Donations" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    @* Ensure client-side validation scripts are loaded (default Razor Pages partial) *@
+    <partial name="_ValidationScriptsPartial" />
+}

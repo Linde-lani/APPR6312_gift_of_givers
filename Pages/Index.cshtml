@@ -5,6 +5,19 @@
     ViewData["Title"] = "Home";
 }
 
+<!-- HERO SECTION -->
+<section class="card">
+    <div class="hero-overlay">
+        <h1>Join the Gifters Community</h1>
+        <p>COMMITTED TO HELPING OUR communities FIND CLOSURE</p>
+        <div class="cta-buttons">
+            <a href="shared/Login" class="cta-button">Login</a>
+            <a href="shared/Register" class="cta-button">Register</a>
+        </div>
+    </div>
+</section>
+
+
 <div class="container py-5">
     <div class="row align-items-center">
         <div class="col-md-7">
@@ -33,6 +46,10 @@
                 <a asp-page="/Shared/Volunteer" class="btn btn-outline-primary btn-lg">
                     Volunteer
                 </a>
+
+                <a asp-page="/Shared/Report" class="btn btn-outline-primary btn-lg">
+                    Report
+                </a>
             </div>
         </div>
 
@@ -47,6 +64,7 @@
                     </p>
 
                     <ul>
+                        <li>Report incident</li>
                         <li>Making a donation</li>
                         <li>Volunteering your skills</li>
                         <li>Supporting relief projects</li>
