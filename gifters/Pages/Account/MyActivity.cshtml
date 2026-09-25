@@ -1,0 +1,50 @@
+@page
+@model gifters.Pages.Account.MyActivityModel
+
+@{
+    ViewData["Title"] = "My Activity";
+}
+
+<div class="container py-5">
+    <h2>My Activity</h2>
+
+    <h4 class="mt-4">Donations</h4>
+    @if (Model.MyDonations.Count == 0)
+    {
+        <p class="text-muted">You have not made any donations yet.</p>
+    }
+    else
+    {
+        <ul class="list-group mb-4">
+            @foreach (var d in Model.MyDonations)
+            {
+                <li class="list-group-item">
+                    <div class="fw-bold">@d.Amount.ToString("C") @d.Currency</div>
+                    <div class="small text-muted">@d.CreatedAt.ToLocalTime().ToString("g") — @d.DonationType</div>
+                </li>
+            }
+        </ul>
+    }
+
+    <h4 class="mt-4">Volunteer Sign-ups</h4>
+    @if (Model.MyVolunteers.Count == 0)
+    {
+        <p class="text-muted">You have not submitted any volunteer registrations yet.</p>
+    }
+    else
+    {
+        <ul class="list-group mb-4">
+            @foreach (var v in Model.MyVolunteers)
+            {
+                <li class="list-group-item">
+                    <div class="fw-bold">@v.FullName</div>
+                    <div class="small text-muted">@v.CreatedAt.ToLocalTime().ToString("g")</div>
+                    <div>@v.Skills</div>
+                </li>
+            }
+        </ul>
+    }
+
+    <a asp-page="/Shared/Donate" class="btn btn-primary me-2">Make a Donation</a>
+    <a asp-page="/Shared/Volunteer" class="btn btn-outline-primary">Volunteer</a>
+</div>

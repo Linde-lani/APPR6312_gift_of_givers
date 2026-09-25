@@ -1,0 +1,54 @@
+@page
+@model gifters.Pages.Account.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Register Account</h2>
+
+            @if (Model.ErrorMessage is string err)
+            {
+                <div class="alert alert-danger">@err</div>
+            }
+
+            @if (Model.SuccessMessage is string ok)
+            {
+                <div class="alert alert-success">@ok</div>
+            }
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label asp-for="Username" class="form-label">Username</label>
+                    <input asp-for="Username" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label">Confirm password</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Role" class="form-label">Register as</label>
+                    <select asp-for="Role" class="form-select">
+                        <option value="Supporter">Supporter</option>
+                        <option value="Employee">Employee</option>
+                    </select>
+                    <div class="form-text">Choose <strong>Employee</strong> only for staff accounts.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create account</button>
+                <a asp-page="/Account/Login" class="btn btn-link">Sign in</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+@page
+@model Microsoft.AspNetCore.Mvc.RazorPages.PageModel
+
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container py-5">
+    <h2>Access Denied</h2>
+    <p class="lead">You do not have permission to view this page. Please log in with an employee account.</p>
+    <a asp-page="/Account/Login" class="btn btn-primary">Sign in</a>
+</div>

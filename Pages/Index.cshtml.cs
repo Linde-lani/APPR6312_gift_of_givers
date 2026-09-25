@@ -1,4 +1,4 @@
--using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace gifters.Pages
@@ -9,7 +9,7 @@ namespace gifters.Pages
 
         public IndexModel(ILogger<IndexModel> logger)
         {
-            _logger = logger;
+            logger = logger;
         }
 
         public void OnGet()
