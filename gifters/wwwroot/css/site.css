@@ -1,0 +1,79 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+    .nav-link:hover,
+    .nav-link.active {
+        color: #ffd700 !important; /* Gold highlight on hover or active */
+    }
+
+/* Home page headings */
+.display-4 {
+    color: #0d6efd;
+}
+
+/* Cards */
+.card {
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+/* Buttons */
+.btn-primary {
+    background-color: #0d6efd;
+    border-radius: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    transition: background-color 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #0b5ed7; /* Slightly darker on hover */
+    }
+
+.btn-outline-primary {
+    border-radius: 25px;
+}
+
+/* Form elements */
+.form-control,
+.form-select {
+    border-radius: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Footer */
+footer {
+    background-color: #0d6efd; /* Blue footer */
+    color: #fff;
+    margin-top: 50px;
+}
+
+    footer p {
+        margin: 0.5rem 0;
+    }

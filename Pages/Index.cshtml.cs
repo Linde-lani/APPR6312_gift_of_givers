@@ -9,7 +9,7 @@ namespace gifters.Pages
 
         public IndexModel(ILogger<IndexModel> logger)
         {
-            _logger = logger;
+            logger = logger;
         }
 
         public void OnGet()

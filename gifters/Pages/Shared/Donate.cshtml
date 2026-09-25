@@ -1,0 +1,85 @@
+﻿@page
+@model DonateModel
+
+@{
+    ViewData["Title"] = "Donate";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1>Donate</h1>
+
+            <p class="lead">
+                Your donation can help support disaster-relief efforts
+                and affected communities.
+            </p>
+
+            <form method="post" class="mt-4">
+
+                <div class="mb-3">
+                    <label for="amount" class="form-label">
+                        Amount
+                    </label>
+
+                    <input type="number"
+                           class="form-control"
+                           id="amount"
+                           name="Amount"
+                           min="1"
+                           step="0.01"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="donationType" class="form-label">
+                        Donation Type
+                    </label>
+
+                    <select class="form-select"
+                            id="donationType"
+                            name="DonationType"
+                            required>
+                        <option value="">Select donation type</option>
+                        <option value="One-Time">One-Time</option>
+                        <option value="Recurring">Recurring</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="currency" class="form-label">
+                        Currency
+                    </label>
+
+                    <select class="form-select"
+                            id="currency"
+                            name="Currency"
+                            required>
+                        <option value="">Select currency</option>
+                        <option value="ZAR">ZAR</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="anonymous"
+                           name="Anonymous">
+
+                    <label class="form-check-label" for="anonymous">
+                        Make my donation anonymous
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Submit Donation
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
