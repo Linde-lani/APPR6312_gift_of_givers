@@ -8,7 +8,181 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.25" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="**\*.cs" />
+
+    <Content Remove="Pages\**" />
+    <ScopedCss Remove="Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Data\AccountStore.cs" />
+    <Compile Include="Data\GiftersDbContext.cs" />
+    <Compile Include="Data\RoomDb.cs" />
+    <Compile Include="Data\RoomDbContext.cs" />
+    <Compile Include="FunctionApp1\Program.cs" />
+    <Compile Include="Models\ActivityItem.cs" />
+    <Compile Include="Models\Donation.cs" />
+    <Compile Include="Models\VolunteerRegistration.cs" />
+    <Compile Include="Pages\Account\ChangePassword.cshtml.cs" />
+    <Compile Include="Pages\Account\Login.cshtml.cs" />
+    <Compile Include="Pages\Account\MyActivity.cshtml.cs" />
+    <Compile Include="Pages\Account\Register.cshtml.cs" />
+    <Compile Include="Pages\Employee\Dashboard.cshtml.cs" />
+    <Compile Include="Pages\Employee\Donations.cshtml.cs" />
+    <Compile Include="Pages\Employee\Volunteers.cshtml.cs" />
+    <Compile Include="Pages\Error.cshtml.cs" />
+    <Compile Include="Pages\Index.cshtml.cs" />
+    <Compile Include="Pages\Privacy.cshtml.cs" />
+    <Compile Include="Pages\Shared\About.cshtml.cs" />
+    <Compile Include="Pages\Shared\Contact.cshtml.cs" />
+    <Compile Include="Pages\Shared\Donate.cshtml.cs" />
+    <Compile Include="Pages\Shared\Volunteer.cshtml.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\accounts.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.json" />
+    <Content Include="bin\Debug\net8.0\gifters.deps.json" />
+    <Content Include="bin\Debug\net8.0\gifters.runtimeconfig.json" />
+    <Content Include="bin\Debug\net8.0\gifters.staticwebassets.endpoints.json" />
+    <Content Include="bin\Debug\net8.0\gifters.staticwebassets.runtime.json" />
+    <Content Include="bin\Debug\net8.0\roomdb.json" />
+    <Content Include="obj\Debug\net8.0\ApiEndpoints.json" />
+    <Content Include="obj\Debug\net8.0\rjimswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rjsmcshtml.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rjsmrazor.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\rpswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.build.endpoints.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.build.json" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.development.json" />
+    <Content Include="obj\gifters.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="Pages\Account\AccessDenied.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Account\ChangePassword.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Account\Login.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Account\MyActivity.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Account\Register.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Employee\Dashboard.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Employee\Donations.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Employee\Volunteers.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Error.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Privacy.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Shared\About.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Shared\Contact.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Shared\Donate.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Shared\Volunteer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Shared\_Layout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\Shared\_ValidationScriptsPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Pages\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Properties\launchSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\gifters.dll" />
+    <None Include="bin\Debug\net8.0\gifters.exe" />
+    <None Include="bin\Debug\net8.0\gifters.pdb" />
+    <None Include="obj\Debug\net8.0\apphost.exe" />
+    <None Include="obj\Debug\net8.0\gifters.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\gifters.assets.cache" />
+    <None Include="obj\Debug\net8.0\gifters.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net8.0\gifters.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net8.0\gifters.csproj.FileListAbsolute.txt" />
+    <None Include="obj\Debug\net8.0\gifters.dll" />
+    <None Include="obj\Debug\net8.0\gifters.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net8.0\gifters.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net8.0\gifters.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net8.0\gifters.pdb" />
+    <None Include="obj\Debug\net8.0\gifters.RazorAssemblyInfo.cache" />
+    <None Include="obj\Debug\net8.0\refint\gifters.dll" />
+    <None Include="obj\Debug\net8.0\ref\gifters.dll" />
+    <None Include="obj\Debug\net8.0\scopedcss\bundle\gifters.styles.css" />
+    <None Include="obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css" />
+    <None Include="obj\Debug\net8.0\scopedcss\projectbundle\gifters.bundle.scp.css" />
+    <None Include="obj\Debug\net8.0\staticwebassets.build.json.cache" />
+    <None Include="obj\Debug\net8.0\staticwebassets.references.upToDateCheck.txt" />
+    <None Include="obj\Debug\net8.0\staticwebassets.removed.txt" />
+    <None Include="obj\Debug\net8.0\staticwebassets.upToDateCheck.txt" />
+    <None Include="obj\gifters.csproj.nuget.g.props" />
+    <None Include="obj\gifters.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\Release\net8.0\gifters.AssemblyInfoInputs.cache" />
+    <None Include="obj\Release\net8.0\gifters.assets.cache" />
+    <None Include="obj\Release\net8.0\gifters.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Release\net8.0\gifters.RazorAssemblyInfo.cache" />
   </ItemGroup>
 
 </Project>

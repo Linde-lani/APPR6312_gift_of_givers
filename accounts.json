@@ -1,0 +1,14 @@
+[
+  {
+    "username": "Katlego",
+    "passwordHashBase64": "tbAYRNdkKXukA2o65W8sOBF3vmONYpp0lXRFT9bHd/o=",
+    "saltBase64": "yGS8/EoLDFiTYNwp6CvnXA==",
+    "role": "Supporter"
+  },
+  {
+    "username": "Lindelani Ngubeni",
+    "passwordHashBase64": "VgOJKz7ghFLOLhupUn7nU/lr\u002Bi4fETtYszkyfVl\u002BAbc=",
+    "saltBase64": "BMgNKaImn04xESEnPHDM5w==",
+    "role": "Employee"
+  }
+]

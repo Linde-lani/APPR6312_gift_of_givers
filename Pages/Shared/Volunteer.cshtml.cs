@@ -33,7 +33,7 @@ public class VolunteerModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)        
+        if (!ModelState.IsValid)
         {
             return Page();
         }
@@ -42,7 +42,8 @@ public class VolunteerModel : PageModel
         {
             FullName = FullName,
             Skills = Skills,
-            Availability = Availability
+            Availability = Availability,
+            SubmittedBy = User?.Identity?.Name ?? string.Empty
         };
 
         await _roomDb.AddVolunteerAsync(registration);

@@ -83,4 +83,10 @@ public class LoginModel : PageModel
         // Supporter (normal user) goes to My Activity (shows their donations & signups)
         return RedirectToPage("/Account/MyActivity");
     }
+
+    public async Task<IActionResult> OnPostLogoutAsync()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToPage("/Account/Login");
+    }
 }

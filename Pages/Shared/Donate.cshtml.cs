@@ -46,7 +46,8 @@ public class DonateModel : PageModel
             Amount = Amount,
             DonationType = DonationType,
             Currency = Currency,
-            Anonymous = Anonymous
+            Anonymous = Anonymous,
+            SubmittedBy = User?.Identity?.Name ?? string.Empty
         };
 
         await _roomDb.AddDonationAsync(donation);

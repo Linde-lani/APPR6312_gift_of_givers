@@ -41,35 +41,59 @@
                     }
 
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link @activeClass("/Index")"
-                               asp-page="/Index">Home</a>
-                        </li>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Index")"
+                                   asp-page="/Index">Home</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link @activeClass("/Shared/About")"
-                               asp-page="/Shared/About">About</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Shared/About")"
+                                   asp-page="/Shared/About">About</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link @activeClass("/Shared/Donate")"
-                               asp-page="/Shared/Donate">Donate</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Shared/Donate")"
+                                   asp-page="/Shared/Donate">Donate</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link @activeClass("/Shared/Volunteer")"
-                               asp-page="/Shared/Volunteer">Volunteer</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Shared/Volunteer")"
+                                   asp-page="/Shared/Volunteer">Volunteer</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link @activeClass("/Shared/Contact")"
-                               asp-page="/Shared/Contact">Contact</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Shared/Contact")"
+                                   asp-page="/Shared/Contact">Contact</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link @activeClass("/Employee/Dashboard")"
-                               asp-page="/Employee/Dashboard">Employee</a>
-                        </li>
+                            @if (User.IsInRole("Employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @activeClass("/Employee/Dashboard")"
+                                       asp-page="/Employee/Dashboard">Employee</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <form method="post" asp-page="/Account/Login" asp-page-handler="Logout" class="d-inline">
+                                    <button type="submit" class="nav-link btn btn-link">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else if (!string.Equals(currentPage, "/Index", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Account/Login")"
+                                   asp-page="/Account/Login">Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link @activeClass("/Account/Register")"
+                                   asp-page="/Account/Register">Register</a>
+                            </li>
+                        }
                     </ul>
 
                 </div>
