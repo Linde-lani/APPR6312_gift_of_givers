@@ -1,0 +1,66 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: DeploySecrets
+  - buildConfiguration: 'Release'
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.x'
+    - script: dotnet restore
+      displayName: 'Restore packages'
+    
+    # Build the Web App
+    - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/web
+      displayName: 'Publish Web App'
+      # workingDirectory: 'YourWebProjectFolder' # Uncomment and put your web folder name here if it's not at the root
+
+    # Build the Function App
+    - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/func
+      displayName: 'Publish Function App'
+      # workingDirectory: 'YourFuncProjectFolder' # Uncomment and put your func folder name here if it's not at the root
+
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - deployment: DeployWeb
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            displayName: 'Deploy Web App'
+            inputs:
+              ConnectionType: 'PublishProfile'
+              PublishProfile: '$(WebAppProfile)'
+              appType: 'webApp'
+              WebAppName: 'giftofthegivers-rg-hqfgbpg6bwfvb0fp' # Web App Name
+              
+  - deployment: DeployFunc
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureFunctionApp@1
+            displayName: 'Deploy Function App'
+            inputs:
+              azureSubscription: 'dummy' 
+              appType: 'functionApp'
+              appName: 'giftofthegivers-func-st10457666' # FUNCTION APP NAME HERE!
+              package: '$(Pipeline.Workspace)/drop/func'
+              deploymentMethod: 'zipDeploy'
