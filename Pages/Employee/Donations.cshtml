@@ -44,7 +44,7 @@
                         <td>@(d.Anonymous ? "Yes" : "No")</td>
                         <td>@d.CreatedAt.ToLocalTime().ToString("g")</td>
                         <td>
-                            <form method="post" asp-page-handler="Delete" asp-route-id="@d.Id" onsubmit="return confirm('Delete donation @d.Id?');">
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@d.Id" asp-route-page="@Model.PageNumber" onsubmit="return confirm('Delete donation @d.Id?');">
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </td>
@@ -53,6 +53,21 @@
             }
         </tbody>
     </table>
+
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Donation pages">
+            <ul class="pagination">
+                <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link" asp-page="" asp-route-page="@(Model.PageNumber - 1)">Previous</a>
+                </li>
+                <li class="page-item disabled"><span class="page-link">Page @Model.PageNumber of @Model.TotalPages</span></li>
+                <li class="page-item @(Model.PageNumber >= Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-page="" asp-route-page="@(Model.PageNumber + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    }
 
     <a asp-page="/Employee/Dashboard" class="btn btn-secondary">Back to Dashboard</a>
 </div>

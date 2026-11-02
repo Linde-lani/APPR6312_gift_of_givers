@@ -14,7 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<GiftersDbContext>(options =>
+builder.Services.AddDbContext<GiftersDbContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("GiftersDb")),
+    contextLifetime: ServiceLifetime.Scoped,
+    optionsLifetime: ServiceLifetime.Singleton);
+builder.Services.AddPooledDbContextFactory<GiftersDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GiftersDb")));
 
 builder.Services.AddScoped<IRoomDb, RoomDb>();

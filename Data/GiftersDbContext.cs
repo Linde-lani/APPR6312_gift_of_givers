@@ -25,6 +25,8 @@ public sealed class GiftersDbContext : DbContext
         modelBuilder.Entity<Donation>(entity =>
         {
             entity.HasKey(donation => donation.Id);
+            entity.HasIndex(donation => donation.CreatedAt);
+            entity.HasIndex(donation => new { donation.SubmittedBy, donation.CreatedAt });
             entity.Property(donation => donation.Amount).HasPrecision(18, 2);
             entity.Property(donation => donation.DonationType).HasMaxLength(100).IsRequired();
             entity.Property(donation => donation.Currency).HasMaxLength(10).IsRequired();
@@ -34,6 +36,8 @@ public sealed class GiftersDbContext : DbContext
         modelBuilder.Entity<VolunteerRegistration>(entity =>
         {
             entity.HasKey(registration => registration.Id);
+            entity.HasIndex(registration => registration.CreatedAt);
+            entity.HasIndex(registration => new { registration.SubmittedBy, registration.CreatedAt });
             entity.Property(registration => registration.FullName).HasMaxLength(200).IsRequired();
             entity.Property(registration => registration.Skills).HasMaxLength(2000).IsRequired();
             entity.Property(registration => registration.Availability).HasMaxLength(500).IsRequired();

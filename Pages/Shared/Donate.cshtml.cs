@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using gifters.Data;
@@ -6,6 +7,7 @@ using gifters.Models;
 
 namespace gifters.Pages.Shared;
 
+[AllowAnonymous]
 public class DonateModel : PageModel
 {
     private readonly IRoomDb _roomDb;
@@ -47,7 +49,7 @@ public class DonateModel : PageModel
             DonationType = DonationType,
             Currency = Currency,
             Anonymous = Anonymous,
-            SubmittedBy = User?.Identity?.Name ?? string.Empty
+            SubmittedBy = Anonymous ? string.Empty : User?.Identity?.Name ?? string.Empty
         };
 
         await _roomDb.AddDonationAsync(donation);

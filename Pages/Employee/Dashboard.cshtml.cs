@@ -28,13 +28,12 @@ public class DashboardModel : PageModel
 
     public async Task OnGetAsync()
     {
-        await _roomDb.EnsureLoadedAsync();
+        var data = await _roomDb.GetDashboardDataAsync();
 
-        DonationsCount = await _roomDb.GetDonationsCountAsync();
-        VolunteersCount = await _roomDb.GetVolunteersCountAsync();
-
-        RecentDonations = await _roomDb.GetDonationsAsync(5);
-        RecentVolunteers = await _roomDb.GetVolunteerRegistrationsAsync(5);
+        DonationsCount = data.DonationsCount;
+        VolunteersCount = data.VolunteersCount;
+        RecentDonations = data.RecentDonations;
+        RecentVolunteers = data.RecentVolunteers;
 
         // Merge into activity feed, order by CreatedAt desc, take up to 10 items
         var activities = new List<ActivityItem>(RecentDonations.Count + RecentVolunteers.Count);

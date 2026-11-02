@@ -10,6 +10,7 @@ namespace gifters.Pages.Employee;
 public class VolunteersModel : PageModel
 {
     private readonly IRoomDb _roomDb;
+    private const int PageSize = 20;
 
     public VolunteersModel(IRoomDb roomDb)
     {
@@ -17,20 +18,24 @@ public class VolunteersModel : PageModel
     }
 
     public IReadOnlyList<VolunteerRegistration> Volunteers { get; private set; } = new List<VolunteerRegistration>();
+    public int PageNumber { get; private set; }
+    public int TotalPages { get; private set; }
 
     [TempData]
     public string? Message { get; set; }
 
-    public async Task OnGetAsync()
+    public async Task OnGetAsync(int page = 1)
     {
-        await _roomDb.EnsureLoadedAsync();
-        Volunteers = await _roomDb.GetAllVolunteerRegistrationsAsync();
+        var result = await _roomDb.GetVolunteerRegistrationsPageAsync(page, PageSize);
+        Volunteers = result.Items;
+        PageNumber = result.PageNumber;
+        TotalPages = result.TotalPages;
     }
 
-    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    public async Task<IActionResult> OnPostDeleteAsync(int id, int page = 1)
     {
         var ok = await _roomDb.DeleteVolunteerAsync(id);
         Message = ok ? "Volunteer registration deleted." : "Record not found.";
-        return RedirectToPage();
+        return RedirectToPage(new { page });
     }
 }
