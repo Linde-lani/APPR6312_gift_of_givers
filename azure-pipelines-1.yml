@@ -5,8 +5,9 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  - group: DeploySecrets
-  - buildConfiguration: 'Release'
+- group: DeploySecrets
+- name: buildConfiguration
+  value: 'Release'
 
 stages:
 - stage: Build
@@ -17,18 +18,17 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '8.x'
+        
     - script: dotnet restore
       displayName: 'Restore packages'
     
     # Build the Web App
     - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/web
       displayName: 'Publish Web App'
-      # workingDirectory: 'YourWebProjectFolder' # Uncomment and put your web folder name here if it's not at the root
 
     # Build the Function App
     - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/func
       displayName: 'Publish Function App'
-      # workingDirectory: 'YourFuncProjectFolder' # Uncomment and put your func folder name here if it's not at the root
 
     - publish: $(Build.ArtifactStagingDirectory)
       artifact: drop
@@ -48,7 +48,7 @@ stages:
               ConnectionType: 'PublishProfile'
               PublishProfile: '$(WebAppProfile)'
               appType: 'webApp'
-              WebAppName: 'giftofthegivers-rg-hqfgbpg6bwfvb0fp' # Web App Name
+              WebAppName: 'giftofthegivers-rg-hqfgbpg6bwfvb0fp'
               
   - deployment: DeployFunc
     environment: 'production'
@@ -61,6 +61,6 @@ stages:
             inputs:
               azureSubscription: 'dummy' 
               appType: 'functionApp'
-              appName: 'giftofthegivers-func-st10457666' # FUNCTION APP NAME HERE!
+              appName: 'giftofthegivers-func-st10457666'
               package: '$(Pipeline.Workspace)/drop/func'
               deploymentMethod: 'zipDeploy'
